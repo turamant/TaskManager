@@ -59,13 +59,13 @@ def info_last(number):
 @cli.command()
 def delete_incorrect_task():
     """ delete a task with an incorrect date """
-    lost_tasks = session.query(Task). \
+    incorrect_tasks = session.query(Task). \
         filter(Task.date_on < datetime.datetime.now()
                .replace(second=0, microsecond=0)) \
         .filter(Task.task_done == 'False').all()
 
-    if lost_tasks:
-        for i in lost_tasks:
+    if incorrect_tasks:
+        for i in incorrect_tasks:
             session.delete(i)
             session.commit()
         print("Logger - опоздавшие задания удалены")

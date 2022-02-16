@@ -59,12 +59,10 @@ async def worker(name, work_queue):
 
         cmd_out = cmd_out.decode('utf-8')
         cmd_err = cmd_err.decode('utf-8')
-        cmd_time_end = datetime.datetime.now()\
-            .replace(second=0, microsecond=0)
+        cmd_time_end = datetime.datetime.now().replace(second=0, microsecond=0)
         done_task(task, cmd_time_end, cmd_out, cmd_err)
         print("Почта отправлена на e-mail")
-        mail = 'Результат испонения комманды: ' + cmd_out +\
-               'Ошибки комманды: ' + cmd_err
+        mail = 'Результат: ' + cmd_out + 'Ошибки комманды: ' + cmd_err
         # send_email(mail) # подключить после настройки smtp servera'''
         print("Logger- Выполнена работа: ", task.command)
         await asyncio.sleep(1)
