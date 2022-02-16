@@ -21,9 +21,9 @@
 <p>Создайте таблицу моделей: python models.py</p>
 
 <h2>(вариант 2) Если работать с Docker image Postgtres</h2>
-<p>Остановите локальный postgresql: sudo systemctl stop postgresql</p>
-<p>Запуск docker контейнера с postgresql: docker-compose up -d --build</p>
-<p>Созздайте таблицу моделей: python models.py</p>
+<p>Остановите: sudo systemctl stop postgresql</p>
+<p>Запуск docker контейнера: docker-compose up -d --build</p>
+<p>Создайте таблицу моделей: python models.py</p>
 
 
 
