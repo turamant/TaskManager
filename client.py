@@ -15,11 +15,9 @@ def cli():
 @click.argument("com")
 @click.option("--date", help="Это хелп")
 def insert(com, date):
-    """
-    <   python client insert "ls -la" --date "2022-02-16 12:20"  >
-    """
+    """ python client insert "ls -la" --date "2022-02-16 12:20 """
     task = Task(
-        command=com,
+         command=com,
         date_on=date,
         task_done=False
     )
@@ -30,7 +28,7 @@ def insert(com, date):
 @cli.command()
 @click.option("--number", "-n", help="Кол-во ближайщих заданий")
 def info_next(number):
-    """ <   python client.py info-next --number 4   >"""
+    """ python client.py info-next --number 4 """
     try:
         q = session.query(Task).filter(Task.task_done == 'False')\
             .order_by(Task.date_on).limit(number).all()
@@ -43,9 +41,7 @@ def info_next(number):
 @cli.command()
 @click.option("--number", "-n", help="Кол-во выполненых заданий")
 def info_last(number):
-    """
-      <   python client.py info-last --number 4   >
-    """
+    """ python client.py info-last --number 4 """
     try:
         q = session.query(DoneTask).order_by(desc(DoneTask.id))\
             .limit(number).all()
