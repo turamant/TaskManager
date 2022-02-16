@@ -31,7 +31,7 @@
 <p>В одном окне терминала: Запустите: python handler.py</p>
 <p>handler должен работать всегда как сервер!</p>
 
-<h3>В другом окне терминала: Работайте из командной строки консоли<h3>
+<h3>В другом окне терминала: Работайте из командной строки консоли</h3>
 <p>python client.py --help</p>
 <p>python client.py insert "ls -la" --date "2022-02-16 16:07"</p>
 <p>python client.py info-next --number 6</p>
