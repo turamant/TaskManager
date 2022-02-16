@@ -69,3 +69,7 @@ async def main():
         await asyncio.gather(asyncio.create_task(worker("-One-", work_queue)),
                              asyncio.create_task(worker("-Two-", work_queue))
                              )
+
+
+if __name__ == '__main__':
+    asyncio.run(main())

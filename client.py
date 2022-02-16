@@ -1,9 +1,17 @@
 from sqlalchemy import desc
 from sqlalchemy.orm import Session
 
+import click
+
 from models import Task, engine, DoneTask
 
+@click.group()
+def cli():
+    pass
 
+@cli.command()
+@click.argument("com")
+@click.option("--date", help="Это хелп")
 def insert(com, date):
     """
     <   python client insert "ls -la" --date "2022-02-16 12:20"  >
@@ -16,6 +24,8 @@ def insert(com, date):
     session.add(task)
     session.commit()
 
+@cli.command()
+@click.option("--number", "-n", help="Кол-во ближайщих заданий")
 def info_next(number):
     """ <   python client.py info-next --number 4   >"""
     q = session.query(Task).filter(Task.task_done == 'False')\
@@ -24,6 +34,8 @@ def info_next(number):
         print(task.id, task.command, task.date_on)
 
 
+@cli.command()
+@click.option("--number", "-n", help="Кол-во выполненых заданий")
 def info_last(number):
     """
       <   python client.py info-last --number 4   >
@@ -35,5 +47,10 @@ def info_last(number):
               f"Текст с консоли: {task.text_out}\n\t"
               f"Текст ошибок: {task.text_err}\n")
 
+
+cli.add_command(insert)
+
+
 if __name__ == '__main__':
     session = Session(bind=engine)
+    cli()
