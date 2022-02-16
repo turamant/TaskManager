@@ -37,8 +37,9 @@ async def worker(name, work_queue):
             cmd_out, cmd_err = cmd.communicate(password.encode())
 
         cmd_out = cmd_out.decode('utf-8')
+        cmd_err = cmd_err.decode('utf-8')
 
-        print(cmd_out, ':', cmd_err.decode('utf-8'))
+        print(cmd_out, ':', cmd_err)
         print("CMD_ERR: ", cmd_err)
         print("type cmd_err: ", type(cmd_err))
 
