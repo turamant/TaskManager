@@ -1,0 +1,15 @@
+version: '2'
+services:
+  db:
+    image: 'bitnami/postgresql:12'
+    ports:
+      - '5432:5432'
+    volumes:
+      - 'postgresql_data_12:/bitnami/postgresql12'
+    environment:
+      - POSTGRESQL_USERNAME=postgres
+      - POSTGRESQL_PASSWORD=postgres
+      - POSTGRESQL_DATABASE=lux105
+      - ALLOW_EMPTY_PASSWORD=yes
+volumes:
+  postgresql_data_12:
