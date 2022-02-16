@@ -68,7 +68,7 @@ def delete_incorrect_task():
         for i in incorrect_tasks:
             session.delete(i)
             session.commit()
-        print("Logger - опоздавшие задания удалены")
+        print("Logger - задания с некорректной датой удалены")
 
 
 cli.add_command(insert)
