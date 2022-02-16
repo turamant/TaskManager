@@ -9,7 +9,7 @@ services:
     environment:
       - POSTGRESQL_USERNAME=postgres
       - POSTGRESQL_PASSWORD=postgres
-      - POSTGRESQL_DATABASE=lux105
+      - POSTGRESQL_DATABASE=task_manager
       - ALLOW_EMPTY_PASSWORD=yes
 volumes:
   postgresql_data_12:

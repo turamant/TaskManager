@@ -6,7 +6,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 
 engine = create_engine(
-    "postgresql+psycopg2://postgres:postgres@localhost:5432/lux105")
+    "postgresql+psycopg2://postgres:postgres@localhost:5432/task_manager")
 engine.connect()
 Base = declarative_base()
 
