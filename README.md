@@ -42,6 +42,6 @@
 <p>python client.py --help</p>
 <p>python client.py insert --help</p>
 <p>python client.py info-next --help</p>
-<p>python client.py info-last --help></p>
+<p>python client.py info-last --help</p>
 
 
