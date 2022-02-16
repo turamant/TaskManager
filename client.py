@@ -1,3 +1,5 @@
+import datetime
+
 from sqlalchemy import desc
 from sqlalchemy.orm import Session
 
@@ -54,7 +56,23 @@ def info_last(number):
               f"Текст ошибок: {task.text_err}\n")
 
 
+@cli.command()
+def delete_incorrect_task():
+    """ delete a task with an incorrect date """
+    lost_tasks = session.query(Task). \
+        filter(Task.date_on < datetime.datetime.now()
+               .replace(second=0, microsecond=0)) \
+        .filter(Task.task_done == 'False').all()
+
+    if lost_tasks:
+        for i in lost_tasks:
+            session.delete(i)
+            session.commit()
+        print("Logger - опоздавшие задания удалены")
+
+
 cli.add_command(insert)
+
 
 
 if __name__ == '__main__':

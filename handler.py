@@ -81,20 +81,6 @@ async def main():
             .filter(Task.task_done == 'False').all()
         for work in q:
             work_queue.put_nowait(work)
-
-        # почистим задания с неправильной датой(ошибка оператора),
-        # можно обработать(выполнить, например)
-        lost_tasks = session.query(Task).\
-            filter(Task.date_on < datetime.datetime.now()
-                   .replace(second=0, microsecond=0))\
-            .filter(Task.task_done == 'False').all()
-
-        if lost_tasks:
-            for i in lost_tasks:
-                session.delete(i)
-                session.commit()
-            print("Logger - опоздавшие задания удалены")
-
         await asyncio.gather(asyncio.create_task(worker("-One-", work_queue)),
                              asyncio.create_task(worker("-Two-", work_queue))
                              )
