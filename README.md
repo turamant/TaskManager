@@ -12,7 +12,7 @@
 <p>pip install -r requirements.txt</p>
 
 <h2>Заполните конфигурационны файл config.ini</h2>
-<p>password = qqqq1234</p>
+<p>password = ваш sudo пароль без кавычек</p>
 <p>[smtp] заполните своей информацией</p>
 <p>После заполнения [smtp] раскоментируйте строки # 65 и 71 файла handler.py</p>
 
