@@ -45,7 +45,7 @@ def done_task(task, cmd_time_end, cmd_out, cmd_err):
 
 async def worker(name, work_queue):
     """
-    worker
+    worker задач
     """
     while not work_queue.empty():
         print(f"задание {name} запущено!")
@@ -69,7 +69,7 @@ async def worker(name, work_queue):
 
 
 async def main():
-    """Рефакторинг требуется, но некогда сегодня"""
+    """Очередь задач"""
     session = Session(bind=engine)
     work_queue = asyncio.Queue()
     while True:
