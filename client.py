@@ -1,6 +1,7 @@
+from sqlalchemy import desc
 from sqlalchemy.orm import Session
 
-from models import Task, engine
+from models import Task, engine, DoneTask
 
 
 def insert(com, date):
@@ -22,6 +23,17 @@ def info_next(number):
     for task in q:
         print(task.id, task.command, task.date_on)
 
+
+def info_last(number):
+    """
+      <   python client.py info-last --number 4   >
+    """
+    q = session.query(DoneTask).order_by(desc(DoneTask.id)).limit(number).all()
+    for task in q:
+        print(f"Номер задания: {task.id}\n\tКомманда: {task.command}\n\t"
+              f"Дата начала: {task.date_on}\n\tВыполнено: {task.date_off}\n\t"
+              f"Текст с консоли: {task.text_out}\n\t"
+              f"Текст ошибок: {task.text_err}\n")
 
 if __name__ == '__main__':
     session = Session(bind=engine)
