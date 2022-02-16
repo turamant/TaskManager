@@ -32,6 +32,6 @@ def send_email(body_text):
     server.quit()
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     send_email("Тестовое письмо")
     print("Почта отправлена")

@@ -38,3 +38,5 @@
 <p>python client.py info-last --number 3</p>
 <h3>Для назначения команды с правом sudo</h3>
 <p>pyton client.py insert "sudo -S apt-get update" --date "2022-02-16 16:27"</p>
+
+

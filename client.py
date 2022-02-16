@@ -5,9 +5,11 @@ import click
 
 from models import Task, engine, DoneTask
 
+
 @click.group()
 def cli():
     pass
+
 
 @cli.command()
 @click.argument("com")
@@ -23,6 +25,7 @@ def insert(com, date):
     )
     session.add(task)
     session.commit()
+
 
 @cli.command()
 @click.option("--number", "-n", help="Кол-во ближайщих заданий")
@@ -44,7 +47,8 @@ def info_last(number):
       <   python client.py info-last --number 4   >
     """
     try:
-        q = session.query(DoneTask).order_by(desc(DoneTask.id)).limit(number).all()
+        q = session.query(DoneTask).order_by(desc(DoneTask.id))\
+            .limit(number).all()
     except Exception as e:
         print("Error: ", e)
     for task in q:

@@ -42,6 +42,7 @@ def done_task(task, cmd_time_end, cmd_out, cmd_err):
     session.add(get_task)
     session.commit()
 
+
 async def worker(name, work_queue):
     """
     worker
@@ -50,7 +51,9 @@ async def worker(name, work_queue):
         print(f"задание {name} запущено!")
         task = await work_queue.get()
 
-        with subprocess.Popen(task.command.split(), stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+        with subprocess.Popen(task.command.split(),
+                              stdin=subprocess.PIPE,
+                              stdout=subprocess.PIPE,
                               stderr=subprocess.PIPE) as cmd:
             cmd_out, cmd_err = cmd.communicate(password)
 
@@ -58,17 +61,21 @@ async def worker(name, work_queue):
         cmd_err = cmd_err.decode('utf-8')
 
         if cmd_err == b'':
-            cmd_time_end = datetime.datetime.now().replace(second=0, microsecond=0)
+            cmd_time_end = datetime.datetime.now()\
+                .replace(second=0, microsecond=0)
             done_task(task, cmd_time_end, cmd_out, cmd_err)
             print("Почта отправлена на e-mail")
-
-            # send_email(cmd_out) # подключить после настройки smtp servera'''
+            mail = 'Результат испонения комманды: ' + cmd_out +\
+                   'Ошибки комманды: ' + cmd_err
+            # send_email(mail) # подключить после настройки smtp servera'''
         else:
-            cmd_time_end = datetime.datetime.now().replace(second=0, microsecond=0)
+            cmd_time_end = datetime.datetime.now()\
+                .replace(second=0, microsecond=0)
             done_task(task, cmd_time_end, cmd_out, cmd_err)
             print("Почта отправлена на e-mail")
-
-            # send_email(cmd_out) # подключить после настройки smtp servera'''
+            mail = 'Результат испонения комманды: ' + cmd_out +\
+                   'Ошибки комманды: ' + cmd_err
+            # send_email(mail) # подключить после настройки smtp servera'''
         print("Logger- Выполнена работа: ", task.command)
         await asyncio.sleep(1)
 
@@ -85,7 +92,8 @@ async def main():
         for work in q:
             work_queue.put_nowait(work)
 
-        # почистим задания с неправильной датой(ошибка оператора), можно обработать(выполнить, например)
+        # почистим задания с неправильной датой(ошибка оператора),
+        # можно обработать(выполнить, например)
         lost_tasks = session.query(Task).\
             filter(Task.date_on < datetime.datetime.now()
                    .replace(second=0, microsecond=0))\
