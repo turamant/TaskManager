@@ -48,7 +48,7 @@ def info_last(number):
     except Exception as e:
         print("Error: ", e)
     for task in q:
-        print(f"Номер задания: {task.id}\n\tКомманда: {task.command}\n\t"
+        print(f"Номер задания: {task.id}\n\tКоманда: {task.command}\n\t"
               f"Дата начала: {task.date_on}\n\tВыполнено: {task.date_off}\n\t"
               f"Текст с консоли: {task.text_out}\n\t"
               f"Текст ошибок: {task.text_err}\n")
