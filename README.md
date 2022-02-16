@@ -35,6 +35,7 @@
 <p>python client.py insert "ls -la" --date "2022-02-16 16:07"</p>
 <p>python client.py info-next --number 6</p>
 <p>python client.py info-last --number 3</p>
+<p>python client.py delete-incorrect-task</p>
 <h3>Для назначения команды с правом sudo</h3>
 <p>pyton client.py insert "sudo -S apt-get update" --date "2022-02-16 16:27"</p>
 
