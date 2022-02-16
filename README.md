@@ -1,5 +1,7 @@
 <h2>Task Manager | (Test task)</h2>
 
+
+
 <h2>Подготовка места установки</h2>
 <p>mkdir taskmanager && cd taskmanager</p>
 <p>python -m venv venv</p>
