@@ -18,7 +18,7 @@
 <h2>Заполните конфигурационны файл config.ini</h2>
 <p>password = qqqq1234</p>
 <p>[smtp] заполните своей информацией</p>
-<p>После заполнения</p>
+<p>После заполнения [smtp] раскоментируйте строки # 65 и 71 файла handler.py</p>
 
 <h2>Создайте модели(таблицу)<h2>
 <p>python models.py</p>
@@ -31,5 +31,5 @@
 <p>python client.py insert "ls -la" --date "2022-02-16 16:07"</p>
 <p>python client.py info-next --number 6</p>
 <p>python client.py info-last --number 3</p>
-
-<p></p>
+<h3>Для назначения команды с правом sudo</h3>
+<p>pyton client.py insert "sudo -S apt-get update" --date "2022-02-16 16:27"</p>

@@ -28,8 +28,11 @@ def insert(com, date):
 @click.option("--number", "-n", help="Кол-во ближайщих заданий")
 def info_next(number):
     """ <   python client.py info-next --number 4   >"""
-    q = session.query(Task).filter(Task.task_done == 'False')\
-        .order_by(Task.date_on).limit(number).all()
+    try:
+        q = session.query(Task).filter(Task.task_done == 'False')\
+            .order_by(Task.date_on).limit(number).all()
+    except Exception as e:
+        print("Error: ", e)
     for task in q:
         print(task.id, task.command, task.date_on)
 
@@ -40,7 +43,10 @@ def info_last(number):
     """
       <   python client.py info-last --number 4   >
     """
-    q = session.query(DoneTask).order_by(desc(DoneTask.id)).limit(number).all()
+    try:
+        q = session.query(DoneTask).order_by(desc(DoneTask.id)).limit(number).all()
+    except Exception as e:
+        print("Error: ", e)
     for task in q:
         print(f"Номер задания: {task.id}\n\tКомманда: {task.command}\n\t"
               f"Дата начала: {task.date_on}\n\tВыполнено: {task.date_off}\n\t"

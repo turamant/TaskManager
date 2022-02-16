@@ -8,6 +8,8 @@ from configparser import ConfigParser
 from sqlalchemy.orm import Session
 
 from models import engine, DoneTask, Task
+from send_mailer import send_email
+
 
 def parse_config():
     base_path = os.path.dirname(os.path.abspath(__file__))
@@ -83,7 +85,7 @@ async def main():
         for work in q:
             work_queue.put_nowait(work)
 
-        # почистим зп=адания с неправильной датой(ошибка оператора)
+        # почистим задания с неправильной датой(ошибка оператора), можно обработать(выполнить, например)
         lost_tasks = session.query(Task).\
             filter(Task.date_on < datetime.datetime.now()
                    .replace(second=0, microsecond=0))\
