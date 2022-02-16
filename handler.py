@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 
 from models import engine, DoneTask, Task
 
-def done_task(task, cmd_time_end, cmd_out):
+def done_task(task, cmd_time_end, cmd_out, cmd_err):
     """
     insert bd done_task
     """
@@ -16,6 +16,7 @@ def done_task(task, cmd_time_end, cmd_out):
         date_on=task.date_on,
         date_off=cmd_time_end,
         text_out=cmd_out,
+        text_err=cmd_err,
     )
     get_task = session.query(Task).get(task.id)
     get_task.task_done = True
@@ -44,10 +45,10 @@ async def worker(name, work_queue):
         if cmd_err == b'':
             cmd_time_end = datetime.datetime.now().replace(second=0, microsecond=0)
             print("Удачно!")
-            done_task(task, cmd_time_end, cmd_out)
+            done_task(task, cmd_time_end, cmd_out, cmd_err)
         else:
             cmd_time_end = datetime.datetime.now().replace(second=0, microsecond=0)
-            done_task(task, cmd_time_end, cmd_err)
+            done_task(task, cmd_time_end, cmd_out, cmd_err)
             print("Вводи правильно комманду!!!")
             # send_email(cmd_out) # подключить после настройки smtp servera'''
         print("Выполнена работа: ", task.command)
