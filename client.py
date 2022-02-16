@@ -15,6 +15,13 @@ def insert(com, date):
     session.add(task)
     session.commit()
 
+def info_next(number):
+    """ <   python client.py info-next --number 4   >"""
+    q = session.query(Task).filter(Task.task_done == 'False')\
+        .order_by(Task.date_on).limit(number).all()
+    for task in q:
+        print(task.id, task.command, task.date_on)
+
 
 if __name__ == '__main__':
     session = Session(bind=engine)
