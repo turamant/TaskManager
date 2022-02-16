@@ -6,6 +6,22 @@ from sqlalchemy.orm import Session
 
 from models import engine, DoneTask, Task
 
+def done_task(task, cmd_time_end, cmd_out):
+    """
+    insert bd done_task
+    """
+    session = Session(bind=engine)
+    donetask = DoneTask(
+        command=task.command,
+        date_on=task.date_on,
+        date_off=cmd_time_end,
+        text_out=cmd_out,
+    )
+    get_task = session.query(Task).get(task.id)
+    get_task.task_done = True
+    session.add(donetask)
+    session.add(get_task)
+    session.commit()
 
 async def worker(name, work_queue):
     """
