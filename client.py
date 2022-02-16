@@ -32,8 +32,11 @@ def insert(com, date):
 def info_next(number):
     """ python client.py info-next --number 4 """
     try:
-        q = session.query(Task).filter(Task.task_done == 'False')\
-            .order_by(Task.date_on).limit(number).all()
+        q = session.query(Task)\
+            .filter(Task.task_done == 'False')\
+            .order_by(Task.date_on)\
+            .limit(number)\
+            .all()
     except Exception as e:
         print("Error: ", e)
     for task in q:
@@ -45,8 +48,10 @@ def info_next(number):
 def info_last(number):
     """ python client.py info-last --number 4 """
     try:
-        q = session.query(DoneTask).order_by(desc(DoneTask.id))\
-            .limit(number).all()
+        q = session.query(DoneTask)\
+            .order_by(desc(DoneTask.id))\
+            .limit(number)\
+            .all()
     except Exception as e:
         print("Error: ", e)
     for task in q:
@@ -60,8 +65,10 @@ def info_last(number):
 def delete_incorrect_task():
     """ delete a task with an incorrect date """
     correct_time = datetime.datetime.now().replace(second=0, microsecond=0)
-    incorrect_tasks = session.query(Task).filter(Task.date_on < correct_time)\
-        .filter(Task.task_done == 'False').all()
+    incorrect_tasks = session.query(Task)\
+        .filter(Task.date_on < correct_time)\
+        .filter(Task.task_done == 'False')\
+        .all()
 
     if incorrect_tasks:
         for i in incorrect_tasks:
