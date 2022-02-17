@@ -3,4 +3,4 @@ venv
 .idea
 .env
 .env.db
-
+conf.ini
