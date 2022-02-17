@@ -1,19 +1,23 @@
 <h2>Task Manager | v.001</h2>
 <ul>Linux Operating System Command Manager:
-<li> Create a task for execution (console command and
+ <li>Create a task for execution (console command and
 schedule are passed as a parameter)</li>
-<li> Get information on the last completed tasks (the number of tasks
+  <li>Get information on the last completed tasks (the number of tasks
 is passed as a parameter) containing information about:
-    1. Start date of execution
-    2. Completion date of execution
-    3. Console command output</li>
-<li> To receive information about the nearest commands for execution (the number of tasks
-is transmitted as a parameter) containing information about:
-    1. Console command
-    2. Date of the next launch</li>
-<li> When performing a task to the email specified in the application settings
+    <ul>
+      <li>Start date of execution</li>
+      <li>Completion date of execution</li>          
+      <li>Console command output</li>
+    </ul>
+    <li> To receive information about the nearest commands for execution (the number of tasks is transmitted as a parameter) containing information about:</li>
+    <ul>
+        <li>Console command</li>
+        <li>Date of the next launch</li>
+    </ul>
+    <li> When performing a task to the email specified in the application settings
 an email is sent with the result of executing the console command</li>
 </ul>
+
 <p>(c) Askvart</p>
 
 
