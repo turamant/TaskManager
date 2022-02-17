@@ -64,9 +64,8 @@ def info_last(number):
 @cli.command()
 def delete_incorrect_task():
     """ delete a task with an incorrect date """
-    correct_time = datetime.datetime.now().replace(second=0, microsecond=0)
     incorrect_tasks = session.query(Task)\
-        .filter(Task.date_on < correct_time)\
+        .filter(Task.date_on < datetime.datetime.now().replace(second=0, microsecond=0))\
         .filter(Task.task_done == 'False')\
         .all()
 
