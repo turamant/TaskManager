@@ -46,6 +46,12 @@ an email is sent with the result of executing the console command</li>
 <p>Create a Model table: python models.py</p>
 
 <h2>(option 2) If you work with Docker image Postgres</h2>
+<ul>Touch file .env.db and fill in the configuration
+<li>POSTGRESQL_USERNAME=postgres</li>
+<li>POSTGRESQL_PASSWORD=postgres</li>
+<li>POSTGRESQL_DATABASE=task1</li>
+<li>ALLOW_EMPTY_PASSWORD=yes</li>
+</ul>
 <p>Stop it: sudo systemctl stop postgresql</p>
 <p>Launching a docker container: docker-compose up -d --build</p>
 <p>Create a Model table: python models.py</p>
