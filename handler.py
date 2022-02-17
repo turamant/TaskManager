@@ -71,13 +71,14 @@ async def main():
                              asyncio.create_task(worker("-Two-", work_queue))
                              )
 
-def set_environ():
-    dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
-    if os.path.exists(dotenv_path):
-        load_dotenv(dotenv_path)
+
+
 
 
 if __name__ == '__main__':
-    set_environ()
+    dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+    if os.path.exists(dotenv_path):
+        load_dotenv(dotenv_path)
     password = os.environ.get("SECRET_KEY").encode()
+
     asyncio.run(main())

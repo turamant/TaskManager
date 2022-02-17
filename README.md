@@ -30,10 +30,16 @@ an email is sent with the result of executing the console command</li>
 <h2>Installing project dependencies</h2>
 <p>pip install -r requirements.txt</p>
 
-<h2>Fill in the configuration file config.ini</h2>
-<p>password = your sudo password without quotes</p>
-<p>[smtp] fill in your information</p>
-<p>After filling out [smtp], uncomment the lines # 65 и 71 файла handler.py</p>
+<h2>Touch file .env and fill in the configuration</h2>
+<p>SECRET_KEY = your sudo password without quotes</p>
+
+<h3>if you want to send an e-mail, then fill in the file .env</h3>
+<p>SERVER = your smtp.server</p>
+<p>FROM_ADDR = your programm@domain.com</p>
+<p>SUBJECT = HEAD mail test task-manager</p>
+<p>TO_ADDR = your@mail.com</p>
+<h3>if you don't need to send emails, then don't fill out </h3>
+
 
 <h2>(option 1) If you work with a local database (not docker!)</h2>
 <p>Run the command: python create_db_local.py</p>
