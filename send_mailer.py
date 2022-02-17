@@ -1,9 +1,8 @@
 import os
 import smtplib
-import sys
-from configparser import ConfigParser
 
 from dotenv import load_dotenv
+
 
 def send_email(body_text):
     """
@@ -16,7 +15,6 @@ def send_email(body_text):
     from_addr = os.environ.get("FROM_ADDR")
     to_addr = os.environ.get("TO_ADDR")
     subject = os.environ.get("SUBJECT")
-    print("I am")
     if host and from_addr and to_addr and subject:
         BODY = "\r\n".join((
             "From: %s" % from_addr,
@@ -29,7 +27,7 @@ def send_email(body_text):
         server.sendmail(from_addr, [to_addr], BODY)
         server.quit()
     else:
-        print("Настройте почтовый сервер. Иначе письма не уходят!")
+        print("Configure the mail server. Otherwise, the letters don't go away!")
 
 
 if __name__ == '__main__':
