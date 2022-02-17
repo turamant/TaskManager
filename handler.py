@@ -49,7 +49,6 @@ async def worker(name, work_queue):
         cmd_err = cmd_err.decode('utf-8')
         cmd_time_end = datetime.datetime.now().replace(second=0, microsecond=0)
         done_task(task, cmd_time_end, cmd_out, cmd_err)
-        print("The mail has been sent to e-mail")
         mail = 'Result: ' + cmd_out + '\nCommand errors: ' + cmd_err
         send_email(mail)
         print("Logger- Work completed: ", task.command)
