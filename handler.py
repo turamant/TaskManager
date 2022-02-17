@@ -51,7 +51,7 @@ async def worker(name, work_queue):
         done_task(task, cmd_time_end, cmd_out, cmd_err)
         print("The mail has been sent to e-mail")
         mail = 'Result: ' + cmd_out + '\nCommand errors: ' + cmd_err
-        # send_email(mail) # connect after configuring smtp server'''
+        send_email(mail)
         print("Logger- Work completed: ", task.command)
         await asyncio.sleep(1)
 
