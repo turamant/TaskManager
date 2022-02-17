@@ -1,5 +1,5 @@
-<h2>Task Manager | (Test task)</h2>
-
+<h2>Task Manager | v.001</h2>
+<p>(c) Askvart</p>
 
 
 <h2>Подготовка места установки</h2>
@@ -24,7 +24,6 @@
 <p>Остановите: sudo systemctl stop postgresql</p>
 <p>Запуск docker контейнера: docker-compose up -d --build</p>
 <p>Создайте таблицу моделей: python models.py</p>
-
 
 
 <h2>Собственно работа</h2>

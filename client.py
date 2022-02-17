@@ -81,4 +81,3 @@ cli.add_command(insert)
 if __name__ == '__main__':
     session = Session(bind=engine)
     cli()
-
