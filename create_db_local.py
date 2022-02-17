@@ -1,13 +1,13 @@
 import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
-# Устанавливаем соединение с postgres
+# Establishing a connection with postgres
 connection = psycopg2.connect(user="postgres", password="postgres")
 connection.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
 
-# Создаем курсор для выполнения операций с базой данных
+# Creating a cursor to perform operations with the database
 cursor = connection.cursor()
 sql_create_database = cursor.execute('create database task1')
-# Закрываем соединение
+# Closing the connection
 cursor.close()
 connection.close()

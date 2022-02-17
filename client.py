@@ -15,11 +15,11 @@ def cli():
 
 @cli.command()
 @click.argument("com")
-@click.option("--date", help="Это хелп")
+@click.option("--date", help="this help")
 def insert(com, date):
     """ python client insert "ls -la" --date "2022-02-16 12:20 """
     task = Task(
-         command=com,
+        command=com,
         date_on=date,
         task_done=False
     )
@@ -28,7 +28,7 @@ def insert(com, date):
 
 
 @cli.command()
-@click.option("--number", "-n", help="Кол-во ближайщих заданий")
+@click.option("--number", "-n", help="Number of upcoming tasks")
 def info_next(number):
     """ python client.py info-next --number 4 """
     try:
@@ -44,7 +44,7 @@ def info_next(number):
 
 
 @cli.command()
-@click.option("--number", "-n", help="Кол-во выполненых заданий")
+@click.option("--number", "-n", help="Number of completed tasks")
 def info_last(number):
     """ python client.py info-last --number 4 """
     try:
@@ -55,10 +55,10 @@ def info_last(number):
     except Exception as e:
         print("Error: ", e)
     for task in q:
-        print(f"Номер задания: {task.id}\n\tКоманда: {task.command}\n\t"
-              f"Дата начала: {task.date_on}\n\tВыполнено: {task.date_off}\n\t"
-              f"Текст с консоли: {task.text_out}\n\t"
-              f"Текст ошибок: {task.text_err}\n")
+        print(f"Task number: {task.id}\n\tCommand: {task.command}\n\t"
+              f"Start date: {task.date_on}\n\tDone: {task.date_off}\n\t"
+              f"Text from the console: {task.text_out}\n\t"
+              f"Error text: {task.text_err}\n")
 
 
 @cli.command()
@@ -73,7 +73,7 @@ def delete_incorrect_task():
         for i in incorrect_tasks:
             session.delete(i)
             session.commit()
-        print("Logger - задания с некорректной датой удалены")
+        print("Logger - tasks with an incorrect date have been deleted")
 
 
 cli.add_command(insert)

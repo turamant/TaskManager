@@ -45,10 +45,10 @@ def done_task(task, cmd_time_end, cmd_out, cmd_err):
 
 async def worker(name, work_queue):
     """
-    worker задач
+    worker tasks
     """
     while not work_queue.empty():
-        print(f"задание {name} запущено!")
+        print(f"Task {name} running!")
         task = await work_queue.get()
 
         with subprocess.Popen(task.command.split(),
@@ -61,15 +61,15 @@ async def worker(name, work_queue):
         cmd_err = cmd_err.decode('utf-8')
         cmd_time_end = datetime.datetime.now().replace(second=0, microsecond=0)
         done_task(task, cmd_time_end, cmd_out, cmd_err)
-        print("Почта отправлена на e-mail")
-        mail = 'Результат: ' + cmd_out + '\nОшибки комманды: ' + cmd_err
-        # send_email(mail) # подключить после настройки smtp servera'''
-        print("Logger- Выполнена работа: ", task.command)
+        print("The mail has been sent to e-mail")
+        mail = 'Result: ' + cmd_out + '\nCommand errors: ' + cmd_err
+        # send_email(mail) # connect after configuring smtp server'''
+        print("Logger- Work completed: ", task.command)
         await asyncio.sleep(1)
 
 
 async def main():
-    """Очередь задач"""
+    """Task Queue"""
     session = Session(bind=engine)
     work_queue = asyncio.Queue()
     while True:

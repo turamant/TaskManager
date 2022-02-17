@@ -33,5 +33,5 @@ def send_email(body_text):
 
 
 if __name__ == '__main__':
-    send_email("Тестовое письмо")
-    print("Почта отправлена")
+    send_email("Test Letter")
+    print("Mail has been sent")
