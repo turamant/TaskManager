@@ -30,7 +30,7 @@ an email is sent with the result of executing the console command</li>
 <h2>Installing project dependencies</h2>
 <p>pip install -r requirements.txt</p>
 
-<h2>Touch file .env and fill in the configuration</h2>
+<h2>Create file .env and fill in the configuration</h2>
 <p>SECRET_KEY = your sudo password without quotes</p>
 
 <h3>if you want to send an e-mail, then fill in the file .env</h3>
@@ -46,7 +46,7 @@ an email is sent with the result of executing the console command</li>
 <p>Create a Model table: python models.py</p>
 
 <h2>(option 2) If you work with Docker image Postgres</h2>
-<ul>Touch file .env.db and fill in the configuration
+<ul>Create file .env.db and fill in the configuration for exaple:
 <li>POSTGRESQL_USERNAME=postgres</li>
 <li>POSTGRESQL_PASSWORD=postgres</li>
 <li>POSTGRESQL_DATABASE=task1</li>
