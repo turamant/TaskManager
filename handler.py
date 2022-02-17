@@ -1,27 +1,15 @@
-import asyncio
-import datetime
 import os
+import datetime
+
+import asyncio
 import subprocess
-import sys
-from configparser import ConfigParser
+
+from dotenv import load_dotenv
 
 from sqlalchemy.orm import Session
 
 from models import engine, DoneTask, Task
 from send_mailer import send_email
-
-
-def parse_config():
-    base_path = os.path.dirname(os.path.abspath(__file__))
-    config_path = os.path.join(base_path, "conf.ini")
-    if os.path.exists(config_path):
-        cfg = ConfigParser()
-        cfg.read(config_path)
-        password = cfg.get("passw", "password")
-        return password
-    else:
-        print("Config not found! Exiting!")
-        sys.exit(1)
 
 
 def done_task(task, cmd_time_end, cmd_out, cmd_err):
@@ -83,7 +71,13 @@ async def main():
                              asyncio.create_task(worker("-Two-", work_queue))
                              )
 
+def set_environ():
+    dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+    if os.path.exists(dotenv_path):
+        load_dotenv(dotenv_path)
+
 
 if __name__ == '__main__':
-    password = parse_config().encode()
+    set_environ()
+    password = os.environ.get("SECRET_KEY").encode()
     asyncio.run(main())
