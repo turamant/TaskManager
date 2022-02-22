@@ -27,9 +27,4 @@ def send_email(body_text):
         server.sendmail(from_addr, [to_addr], BODY)
         server.quit()
     else:
-        print("Configure the mail server. Otherwise, the letters don't go away!")
-
-
-if __name__ == '__main__':
-    send_email("Test Letter")
-    print("Mail has been sent")
+        print("Configure the mail server!")

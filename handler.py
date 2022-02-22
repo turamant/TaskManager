@@ -1,8 +1,8 @@
 import os
 import datetime
 
-import asyncio
 import subprocess
+from queue import Queue
 
 from dotenv import load_dotenv
 
@@ -31,14 +31,13 @@ def done_task(task, cmd_time_end, cmd_out, cmd_err):
     session.commit()
 
 
-async def worker(name, work_queue):
+def worker(name, work_queue):
     """
     worker tasks
     """
     while not work_queue.empty():
-        print(f"Task {name} running!")
-        task = await work_queue.get()
-
+        task = work_queue.get()
+        password = os.environ.get("SECRET_KEY").encode()
         with subprocess.Popen(task.command.split(),
                               stdin=subprocess.PIPE,
                               stdout=subprocess.PIPE,
@@ -49,32 +48,34 @@ async def worker(name, work_queue):
         cmd_err = cmd_err.decode('utf-8')
         cmd_time_end = datetime.datetime.now().replace(second=0, microsecond=0)
         done_task(task, cmd_time_end, cmd_out, cmd_err)
-        mail = 'Result: ' + cmd_out + '\nCommand errors: ' + cmd_err
+        mail = f'Result: {cmd_out} \nCommand errors: {cmd_err}'
         send_email(mail)
-        print("Logger- Work completed: ", task.command)
-        await asyncio.sleep(1)
 
 
-async def main():
+def main():
     """Task Queue"""
     session = Session(bind=engine)
-    work_queue = asyncio.Queue()
+    work_queue = Queue()
     while True:
         q = session.query(Task)\
-            .filter(Task.date_on == datetime.datetime.now().replace(second=0, microsecond=0))\
+            .filter(Task.date_on == datetime.datetime.now()
+                    .replace(second=0, microsecond=0))\
             .filter(Task.task_done == 'False')\
             .all()
         for work in q:
             work_queue.put_nowait(work)
-        await asyncio.gather(asyncio.create_task(worker("-One-", work_queue)),
-                             asyncio.create_task(worker("-Two-", work_queue))
-                             )
+        worker("-One-", work_queue)
 
 
-if __name__ == '__main__':
+def set_dotenviromment():
     dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
     if os.path.exists(dotenv_path):
         load_dotenv(dotenv_path)
-    password = os.environ.get("SECRET_KEY").encode()
+    else:
+        print('Файл .env отсутствует!')
+        exit()
 
-    asyncio.run(main())
+
+if __name__ == '__main__':
+    set_dotenviromment()
+    main()

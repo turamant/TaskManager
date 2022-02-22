@@ -18,19 +18,25 @@ def cli():
 @click.option("--date", help="this help")
 def insert(com, date):
     """ python client insert "ls -la" --date "2022-02-16 12:20 """
-    task = Task(
-        command=com,
-        date_on=date,
-        task_done=False
-    )
-    session.add(task)
-    session.commit()
+    session = Session(bind=engine)
+    trans_date = datetime.datetime.strptime(date, "%Y-%m-%d %H:%M")
+    if trans_date < datetime.datetime.now().replace(second=0, microsecond=0):
+        print("Задание не взято в работу - дата с опозданием")
+    else:
+        task = Task(
+            command=com,
+            date_on=date,
+            task_done=False
+        )
+        session.add(task)
+        session.commit()
 
 
 @cli.command()
 @click.option("--number", "-n", help="Number of upcoming tasks")
 def info_next(number):
     """ python client.py info-next --number 4 """
+    session = Session(bind=engine)
     try:
         q = session.query(Task)\
             .filter(Task.task_done == 'False')\
@@ -47,6 +53,7 @@ def info_next(number):
 @click.option("--number", "-n", help="Number of completed tasks")
 def info_last(number):
     """ python client.py info-last --number 4 """
+    session = Session(bind=engine)
     try:
         q = session.query(DoneTask)\
             .order_by(desc(DoneTask.id))\
@@ -64,8 +71,10 @@ def info_last(number):
 @cli.command()
 def delete_incorrect_task():
     """ delete a task with an incorrect date """
+    session = Session(bind=engine)
     incorrect_tasks = session.query(Task)\
-        .filter(Task.date_on < datetime.datetime.now().replace(second=0, microsecond=0))\
+        .filter(Task.date_on < datetime.datetime.now().
+                replace(second=0, microsecond=0))\
         .filter(Task.task_done == 'False')\
         .all()
 
@@ -79,5 +88,4 @@ def delete_incorrect_task():
 cli.add_command(insert)
 
 if __name__ == '__main__':
-    session = Session(bind=engine)
     cli()
